@@ -24,8 +24,8 @@ def player(board):
     """
     count_X = 0
     count_O = 0
-    for i in range(3):
-        for j in range(3):
+    for i in range(0,len(board)):
+        for j in range(0,len(board[0])):
             if board(i,j)==X:
                 count_X+=1
             elif board(i,j)==O:
@@ -35,11 +35,19 @@ def player(board):
     else:
         return X
 
+
 def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    raise NotImplementedError
+    action = set()
+
+    for i in range(0,len(board)):
+        for j in range(0,len(board[0])):
+            if board[i][j]==EMPTY:
+                action.add((i,j))
+
+    return action
 
 
 def result(board, action):
