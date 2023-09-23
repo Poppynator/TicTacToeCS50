@@ -3,6 +3,7 @@ Tic Tac Toe Player
 """
 
 import math
+import copy
 
 X = "X"
 O = "O"
@@ -26,9 +27,9 @@ def player(board):
     count_O = 0
     for i in range(0,len(board)):
         for j in range(0,len(board[0])):
-            if board(i,j)==X:
+            if board[i][j]==X:
                 count_X+=1
-            elif board(i,j)==O:
+            elif board[i][j]==O:
                 count_O+=1
     if count_O < count_X:
         return O
@@ -55,8 +56,9 @@ def result(board, action):
     Returns the board that results from making move (i, j) on the board.
     """
 
-    board[action[0]][action[1]] = player(board)
-    return board
+    result = copy.deepcopy(board)
+    result[action[0]][action[1]] = player(board)
+    return result
 
 
 def winner(board):
@@ -139,14 +141,14 @@ def maxValue(board):
             val = v
             move = action
             if val == 1:
-                return val,move
+                return val, move
     
     return val,move
 
 
 def minValue(board):
     if terminal(board):
-        return 
+        return utility(board),None
 
     val = float('inf')
     move = None
@@ -156,7 +158,7 @@ def minValue(board):
             val = v
             move = action
             if val == -1:
-                return val,move
+                return val, move
 
     return val,move
 
